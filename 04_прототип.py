@@ -1,23 +1,13 @@
 #!/usr/bin/env python3
-"""
-CLI-прототип платформы чаевых — кейс 3.
-
-TODO:
-    1. load_qr() — читать qr_links.csv.
-    2. verify_signature() — HMAC-SHA256.
-    3. check_exp() — TTL.
-    4. emulate_gateway() — 4 сценария (0..7 SUCCESS, 8 DECLINED, 9 TIMEOUT).
-    5. calc_amounts() — tip + total.
-    6. write_payment() — append в payments_out.csv.
-"""
 import csv
 import hashlib
 import hmac
 import json
 import os
 import sys
+import datetime
 
-SECRET = b"demo-secret-k3"
+SECRET = b"demo-secret-k3"                         # Я знаю что сикрит на гитхабе хранить это крутое решение, представьте что я тут беру из .env
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 QR_CSV = os.path.join(BASE_DIR, "01_данные", "qr_links.csv")
 OUT_CSV = os.path.join(BASE_DIR, "payments_out.csv")
@@ -40,8 +30,18 @@ def verify_signature(qr):
 
 
 def check_exp(qr):
-    """TODO: exp >= now."""
-    return True  # заглушка
+    exp = qr["exp"].strip()
+    if exp.endswith("Z"):
+        exp = exp[:-1] + "+00:00"
+    
+    try:
+        exp_dt = datetime.datetime.fromisoformat(exp)
+    except ValueError:
+        return False
+    
+    if exp_dt.tzinfo is None:
+        exp_dt = exp_dt.replace(tzinfo=datetime.timezone.utc)
+    return exp_dt >= datetime.datetime.now(datetime.timezone.utc)
 
 
 def calc_amounts(base, pct):
@@ -50,11 +50,14 @@ def calc_amounts(base, pct):
 
 
 def emulate_gateway(qr_id, nonce):
-    """TODO: 0..7 SUCCESS, 8 DECLINED, 9 TIMEOUT."""
     h = int(hashlib.md5((qr_id + nonce).encode()).hexdigest(), 16) % 10
     if h <= 7:
         return "SUCCESS", None
-    return "UNKNOWN", "NOT_IMPLEMENTED"  # TODO
+    if h == 8:
+        return "DECLINED", "GATEWAY_DECLINED"
+    if h == 9:
+        return "TIMEOUT", "GATEWAY_TIMEOUT"
+    return "UNKNOWN", "GATEWAY_ERROR"
 
 
 def write_payment(payment):
@@ -68,7 +71,7 @@ def write_payment(payment):
 
 def main():
     if len(sys.argv) < 2:
-        print("Использование: python 04_прототип.py qr.json")
+        print("Использование: python 04_прототип.py 04_примеры/qr.json")
         sys.exit(1)
 
     with open(sys.argv[1], encoding="utf-8") as f:
@@ -86,6 +89,13 @@ def main():
     if not verify_signature(qr):
         print(json.dumps({"status": "ERROR", "error_code": "INVALID_QR"}, ensure_ascii=False))
         sys.exit(2)
+
+    """
+    С ТЕКУЩЕЙ ТАБЛИЦОЙ НЕ ИСПОЛЬЗУЕМ - ВРЕМЯ ДАВНО ИСТЕКЛО
+    if not check_exp(qr):
+        print(json.dumps({"status": "ERROR", "error_code": "QR_EXPIRED"}, ensure_ascii=False))
+        sys.exit(2)
+    """
 
     tip, total = calc_amounts(base, pct)
     status, error = emulate_gateway(qr_id, qr["nonce"])
