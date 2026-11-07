@@ -45,7 +45,8 @@ def check_exp(qr):
 
 
 def calc_amounts(base, pct):
-    tip = round(base * pct / 100, 2)
+    tip = round(base * (pct / 100), 2)
+
     return tip, round(base + tip, 2)
 
 
@@ -100,6 +101,19 @@ def main():
     tip, total = calc_amounts(base, pct)
     status, error = emulate_gateway(qr_id, qr["nonce"])
 
+    if not(0 < base <= 100000):
+        print(json.dumps({"status": "ERROR", "error_code": "AMOUNT_OUT_OF_RANGE"}, ensure_ascii=False))
+        sys.exit(2)
+
+    if not(0 <= pct <= 50):
+        print(json.dumps({"status": "ERROR", "error_code": "TIP_OUT_OF_RANGE"}, ensure_ascii=False))
+        sys.exit(2)
+
+    if not(0 <= total <= 2000000):
+            print(json.dumps({"status": "ERROR", "error_code": "AMOUNT_OUT_OF_RANGE"}, ensure_ascii=False))
+            sys.exit(2)
+    
+        
     payment = {
         "payment_id": f"p_demo_{qr_id[-3:]}",
         "merchant_id": qr["merchant_id"],

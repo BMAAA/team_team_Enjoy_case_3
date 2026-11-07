@@ -34,7 +34,14 @@ components:
       properties:
         # TODO: qr_id, merchant_id, employee_id, employee_name,
         #       receipt_id, base_amount, currency, tip_options
-        ?
+        qr_id: {type: string, pattern: '^qr_[0-9]{3}$'}
+        merchant_id: {type: string, pattern: '^m_[0-9]{3}$'}
+        employee_id: {type: string, pattern: '^e_[0-9]{3}$'}
+        employee_name: {type: string}
+        receipt_id: {type: string, pattern: '^r_[0-9]{3}$'}
+        base_amount: {type: number, format: double, minimum: 0.01, maximum: 1000000.00}
+        currency: {type: string}
+        tip_options: {type: array, items: {type: number, minimum: 0, maximum: 50}}
 
     TipCreate:
       type: object
@@ -42,28 +49,54 @@ components:
       properties:
         # TODO: qr_id, receipt_id, base_amount, tip_pct (0..50),
         #       idempotency_key
-        ?
+        qr_id: {type: string, pattern: '^q_[0-9]{3}$'}
+        receipt_id: {type: string, pattern: '^r_[0-9]{3}$'}
+        base_amount: {type: number, format: double, minimum: 0.01, maximum: 1000000.00}
+        tip_pct: {type: number, minimum: 0, maximum: 50}
+        idempotency_key: {type: string, minLength: 1}
 
     Payment:
       type: object
       properties:
-        # TODO: payment_id, status (CREATED/PENDING/SUCCESS/DECLINED/CANCELED),
-        #       amount_total, tip_amount, confirm_token, error_code
-        ?
+        payment_id: {type: string, pattern: '^p_[0-9]{4}$'}
+        status: {type: string, enum: [CREATED, PENDING, SUCCESS, DECLINED, CANCELED]}
+        amount_total: {type: number, minimum: 0, maximum: 2000000, multipleOf: 0.01}
+        tip_amount: {type: number, minimum: 0, multipleOf: 0.01}
+        confirm_token: {type: string}
+        error_code: {type: string, nullable: true}
 
     Report:
       type: object
       properties:
-        # TODO: merchant_id, period, tips_total, payments_count,
-        #       avg_tip_pct, success_rate
-        ?
+        merchant_id: {type: string}
+        period: {type: string}
+        tips_total: {type: number, minimum: 0}
+        payments_count: {type: integer, minimum: 0}
+        avg_tip_pct: {type: number, nullable: true, minimum: 0, maximum: 50}
+        success_rate: {type: number, nullable: true, minimum: 0, maximum: 1}
 
     Error:
       type: object
       required: [error_code, message]
       properties:
-        # TODO: error_code, message, retryable, details
-        ?
+        error_code: {type: string}
+        message: {type: string}
+        retryable: {type: boolean}
+        details: {type: object, additionalProperties: true}
+
+  responses:
+    ErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    
+    PaymentResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Payment'
 
 paths:
   # ---------- ОБРАЗЕЦ ----------
@@ -82,26 +115,44 @@ paths:
     get:
       summary: TODO — данные QR для формы чаевых
       parameters: [{name: qr_id, in: path, required: true, schema: {type: string}}]
-      # TODO: responses 200 (QRResponse), 404, 410 (QR_EXPIRED), 422 (INVALID_QR)
-      ?
+      responses:
+        '200':
+          description: Валидный QR и данные чека
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/QRResponse'}
+        '404': {$ref: '#/components/responses/ErrorResponse'}
+        '410': {$ref: '#/components/responses/ErrorResponse'}
+        '422': {$ref: '#/components/responses/ErrorResponse'}
 
   /api/v1/tips:
     post:
       summary: TODO — создать платёж с чаевыми
-      # TODO: requestBody TipCreate, responses 201 (Payment), 409, 422
-      ?
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/TipCreate'}
+      responses:
+        '201': {$ref: '#/components/responses/PaymentResponse'}
+        '409': {$ref: '#/components/responses/ErrorResponse'}
+        '422': {$ref: '#/components/responses/ErrorResponse'}
 
   /api/v1/payments/{id}/confirm:
     post:
       summary: TODO — подтвердить платёж
-      # TODO: responses 200, 402, 409
-      ?
+      responses:
+        '200': {$ref: '#/components/responses/PaymentResponse'}
+        '402': {$ref: '#/components/responses/PaymentResponse'}
+        '409': {$ref: '#/components/responses/ErrorResponse'}
 
   /api/v1/payments/{id}/cancel:
     post:
       summary: TODO — отменить платёж (до подтверждения)
-      # TODO: responses 200, 409
-      ?
+      parameters: [{$ref: '#/components/parameters/PaymentId'}]
+      responses:
+        '200': {$ref: '#/components/responses/PaymentResponse'}
+        '409': {$ref: '#/components/responses/ErrorResponse'}
 
   /api/v1/reports/tips:
     get:
@@ -110,5 +161,12 @@ paths:
         - {name: merchant_id, in: query, required: true, schema: {type: string}}
         - {name: from, in: query, required: true, schema: {type: string, format: date}}
         - {name: to, in: query, required: true, schema: {type: string, format: date}}
-      # TODO: responses 200 (Report), 403
-      ?
+      responses:
+        '200':
+          description: Агрегаты по выбранному объекту за период
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - {$ref: '#/components/schemas/Report'}
+        '403': {$ref: '#/components/responses/ErrorResponse'}
