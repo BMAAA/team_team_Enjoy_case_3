@@ -60,7 +60,6 @@ def calc_amounts(base, pct):
 
 def emulate_gateway(qr_id, nonce):
     h = int(hashlib.md5((qr_id + nonce).encode()).hexdigest(), 16) % 10
-    print(h)
     if h <= 7:
         return "SUCCESS", None
     if h == 8:
