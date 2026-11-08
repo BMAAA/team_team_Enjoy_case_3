@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
+from dotenv import load_dotenv
+
+import json
 import csv
+
 import hashlib
 import hmac
-import json
+
 import os
 import sys
+
 import datetime
 
-SECRET = b"demo-secret-k3"                         # Я знаю что сикрит на гитхабе хранить это крутое решение, представьте что я тут беру из .env
+load_dotenv()
+
+
+SECRET = bytes(os.getenv('SECRET_KEY'), 'utf-8+')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 QR_CSV = os.path.join(BASE_DIR, "01_данные", "qr_links.csv")
 OUT_CSV = os.path.join(BASE_DIR, "payments_out.csv")
@@ -52,13 +60,14 @@ def calc_amounts(base, pct):
 
 def emulate_gateway(qr_id, nonce):
     h = int(hashlib.md5((qr_id + nonce).encode()).hexdigest(), 16) % 10
+    print(h)
     if h <= 7:
         return "SUCCESS", None
     if h == 8:
-        return "DECLINED", "GATEWAY_DECLINED"
+        return "DECLINED", "CARD_DECLINED"
     if h == 9:
         return "TIMEOUT", "GATEWAY_TIMEOUT"
-    return "UNKNOWN", "GATEWAY_ERROR"
+    return "UNKNOWN", "NOT_IMPLEMENTED"
 
 
 def write_payment(payment):
