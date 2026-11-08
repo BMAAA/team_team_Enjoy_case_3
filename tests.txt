@@ -1,0 +1,7 @@
+python 04_прототип.py 04_примеры/t3_1_success.json
+python 04_прототип.py 04_примеры/t3_2_declined.json
+python 04_прототип.py 04_примеры/t3_3_invalid_sig.json
+python 04_прототип.py 04_примеры/t3_3_expired.json
+python 04_прототип.py 04_примеры/t3_4_idempotency.json
+python 04_прототип.py 04_примеры/t3_4_idempotency.json
+python 04_прототип.py 04_примеры/t3_5_cancel.json

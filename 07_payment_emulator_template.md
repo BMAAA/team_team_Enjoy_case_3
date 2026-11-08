@@ -41,8 +41,8 @@
 |---|---|
 | base_amount | 637.00 |
 | tip_pct | 5 |
-| tip_amount | 40.00 |
-| amount_total | 840.00 |
+| tip_amount | 31.85 |
+| amount_total | 668.85 |
 | h | 9 |
 | Исход формулы | TIMEOUT / GATEWAY_TIMEOUT в CLI; в проектной модели платёж остаётся PENDING |
 | Историческая запись p_0001 | SUCCESS, amount=637.00, tip=31.85 |
@@ -53,8 +53,8 @@
 |---|---|
 | base_amount | 911.00 |
 | tip_pct | 15 |
-| tip_amount | 150.00 |
-| amount_total | 1650.00 |
+| tip_amount | 136.65 |
+| amount_total | 1047.65 |
 | h | 7 |
 | Исход формулы | SUCCESS |
 | Историческая запись p_0003 | SUCCESS, amount=911.00, tip=136.65 |

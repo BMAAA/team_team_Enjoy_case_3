@@ -38,7 +38,7 @@ components:
         merchant_id: {type: string, pattern: '^m_[0-9]{3}$'}
         employee_id: {type: string, pattern: '^e_[0-9]{3}$'}
         employee_name: {type: string}
-        receipt_id: {type: string, pattern: '^r_[0-9]{3}$'}
+        receipt_id: {type: string, pattern: '^r_[0-9]{4}$'}
         base_amount: {type: number, format: double, minimum: 0.01, maximum: 1000000.00}
         currency: {type: string}
         tip_options: {type: array, items: {type: number, minimum: 0, maximum: 50}}
@@ -49,8 +49,8 @@ components:
       properties:
         # TODO: qr_id, receipt_id, base_amount, tip_pct (0..50),
         #       idempotency_key
-        qr_id: {type: string, pattern: '^q_[0-9]{3}$'}
-        receipt_id: {type: string, pattern: '^r_[0-9]{3}$'}
+        qr_id: {type: string, pattern: '^qr_[0-9]{3}$'}
+        receipt_id: {type: string, pattern: '^r_[0-9]{4}$'}
         base_amount: {type: number, format: double, minimum: 0.01, maximum: 1000000.00}
         tip_pct: {type: number, minimum: 0, maximum: 50}
         idempotency_key: {type: string, minLength: 1}
@@ -84,8 +84,18 @@ components:
         retryable: {type: boolean}
         details: {type: object, additionalProperties: true}
 
+  parameters:
+    PaymentId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^p_[0-9]{4}$'
+
   responses:
     ErrorResponse:
+      description: Ошибка обработки запроса
       content:
         application/json:
           schema:
@@ -93,6 +103,7 @@ components:
     
     
     PaymentResponse:
+      description: Данные платежа
       content:
         application/json:
           schema:
@@ -141,6 +152,7 @@ paths:
   /api/v1/payments/{id}/confirm:
     post:
       summary: TODO — подтвердить платёж
+      parameters: [{$ref: '#/components/parameters/PaymentId'}]
       responses:
         '200': {$ref: '#/components/responses/PaymentResponse'}
         '402': {$ref: '#/components/responses/PaymentResponse'}
