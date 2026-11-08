@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from dotenv import load_dotenv
+from dotenv import load_dotenv # pyright: ignore[reportMissingImports]
 
 import json
 import csv
