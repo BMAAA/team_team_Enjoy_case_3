@@ -110,7 +110,7 @@ def main():
     tip, total = calc_amounts(base, pct)
     status, error = emulate_gateway(qr_id, qr["nonce"])
 
-    if not(0 < base <= 100000):
+    if not(0 < base <= 1000000):
         print(json.dumps({"status": "ERROR", "error_code": "AMOUNT_OUT_OF_RANGE"}, ensure_ascii=False))
         sys.exit(2)
 

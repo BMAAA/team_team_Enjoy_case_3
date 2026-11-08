@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050" role="img" aria-labelledby="title desc">
+<title id="title">A.3. Состояния платежа</title>
+<desc id="desc">Источник: 07_payment_emulator_template.md · 04_requirements.md (FR-5, FR-7) · 05_api_schemas.yaml</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#334155"/></marker></defs>
+<rect width="1600" height="1050" fill="white"/>
+<g font-family="Arial, sans-serif" fill="#0F172A">
+<text x="800.0" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#0F172A"><tspan x="800.0" dy="0">A.3. Состояния платежа</tspan></text>
+<text x="800.0" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="normal" fill="#0F172A"><tspan x="800.0" dy="0">Источник: 07_payment_emulator_template.md · 04_requirements.md (FR-5, FR-7) · 05_api_schemas.yaml</tspan></text>
+<polyline points="430,430 650,430" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="990,400 1100,400 1100,235 1210,235" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="990,480 1100,480 1100,685 1210,685" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="760,360 760,180 920,180 920,360" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="265,520 265,790" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<rect x="100" y="360" width="330" height="160" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<path d="M100 414 H430" stroke="#2563EB" stroke-opacity="0.4"/>
+<text x="265.0" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="265.0" dy="0">CREATED</tspan></text>
+<text x="265.0" y="444" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#0F172A"><tspan x="265.0" dy="0">Платёж создан</tspan><tspan x="265.0" dy="27">QR зарезервирован</tspan></text>
+<rect x="650" y="360" width="340" height="160" rx="12" fill="#FFF7ED" stroke="#C2410C" stroke-width="2"/>
+<path d="M650 414 H990" stroke="#C2410C" stroke-opacity="0.4"/>
+<text x="820.0" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="820.0" dy="0">PENDING</tspan></text>
+<text x="820.0" y="444" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#0F172A"><tspan x="820.0" dy="0">Подтверждён, в обработке</tspan><tspan x="820.0" dy="27">Результат может быть неизвестен</tspan></text>
+<rect x="1210" y="160" width="300" height="150" rx="12" fill="#F0FDF4" stroke="#15803D" stroke-width="2"/>
+<path d="M1210 214 H1510" stroke="#15803D" stroke-opacity="0.4"/>
+<text x="1360.0" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="1360.0" dy="0">SUCCESS</tspan></text>
+<text x="1360.0" y="244" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#0F172A"><tspan x="1360.0" dy="0">QR использован окончательно</tspan></text>
+<rect x="1210" y="610" width="300" height="150" rx="12" fill="#FFF1F2" stroke="#BE123C" stroke-width="2"/>
+<path d="M1210 664 H1510" stroke="#BE123C" stroke-opacity="0.4"/>
+<text x="1360.0" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="1360.0" dy="0">DECLINED</tspan></text>
+<text x="1360.0" y="694" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#0F172A"><tspan x="1360.0" dy="0">Резерв QR освобождён</tspan></text>
+<rect x="100" y="790" width="330" height="150" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2"/>
+<path d="M100 844 H430" stroke="#475569" stroke-opacity="0.4"/>
+<text x="265.0" y="825" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="265.0" dy="0">CANCELED</tspan></text>
+<text x="265.0" y="874" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#0F172A"><tspan x="265.0" dy="0">Резерв QR освобождён</tspan></text>
+<rect x="451.15" y="357" width="177.70000000000002" height="54" rx="4" fill="white"/>
+<text x="540" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="540" dy="0">Клиент подтвердил</tspan><tspan x="540" dy="27">до вызова эмулятора</tspan></text>
+<rect x="1060.95" y="302" width="78.10000000000001" height="54" rx="4" fill="white"/>
+<text x="1100" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1100" dy="0">h = 0…7</tspan><tspan x="1100" dy="27">Успех</tspan></text>
+<rect x="1036.05" y="532" width="127.9" height="81" rx="4" fill="white"/>
+<text x="1100" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1100" dy="0">h = 8</tspan><tspan x="1100" dy="27">CARD_DECLINED</tspan><tspan x="1100" dy="27">HTTP 402</tspan></text>
+<rect x="717.95" y="115" width="244.10000000000002" height="54" rx="4" fill="white"/>
+<text x="840" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="840" dy="0">h = 9 · GATEWAY_TIMEOUT</tspan><tspan x="840" dy="27">HTTP 202 · остаётся PENDING</tspan></text>
+<rect x="188.6" y="622" width="152.8" height="54" rx="4" fill="white"/>
+<text x="265" y="640" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="265" dy="0">Клиент отменил</tspan><tspan x="265" dy="27">до подтверждения</tspan></text>
+<text x="310" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="normal" fill="#475569"><tspan x="310" dy="0">Вход в CREATED: проверки QR и сумм пройдены,</tspan><tspan x="310" dy="27">созданы payment_id и резерв QR (HTTP 201).</tspan></text>
+<text x="1060" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="normal" fill="#9F1239"><tspan x="1060" dy="0">Отмена из PENDING / SUCCESS запрещена: HTTP 409,</tspan><tspan x="1060" dy="27">CANCEL_NOT_ALLOWED; состояние платежа не меняется.</tspan></text>
+<text x="800" y="995" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="normal" fill="#475569"><tspan x="800" dy="0">Тайм-аут сохраняет резерв QR. CLI возвращает TIMEOUT; в проектной модели это PENDING.</tspan></text>
+</g></svg>

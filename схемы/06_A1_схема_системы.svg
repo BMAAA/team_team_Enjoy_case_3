@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="940" viewBox="0 0 1480 940" role="img" aria-labelledby="title desc">
+<title id="title">A.1. Схема системы онлайн-чаевых</title>
+<desc id="desc">Пять блоков: Клиент, Платформа, Эмулятор шлюза, Хранилище, Аудит. Подписаны запросы, ответы, чтение и запись данных и события аудита.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#334155" /></marker></defs>
+<rect width="1480" height="940" fill="white" />
+<g font-family="Arial, sans-serif" fill="#0F172A">
+<text x="740" y="55" text-anchor="middle" font-size="28" font-weight="bold"><tspan x="740" dy="0">A.1. Схема системы — онлайн-чаевые</tspan></text>
+<text x="740" y="95" text-anchor="middle" font-size="18" font-weight="normal"><tspan x="740" dy="0">Проектная модель · 5 блоков · оплата только эмулируется</tspan></text>
+<polyline points="300,250 550,250" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="550,350 300,350" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="910,250 1160,250" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="1160,350 910,350" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="620,400 620,480 420,480 420,670" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="650,670 650,560 800,560 800,400" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<polyline points="880,400 880,470 1210,470 1210,670" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)" />
+<rect x="30" y="200" width="270" height="200" rx="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+<text x="165.0" y="238" text-anchor="middle" font-size="23" font-weight="bold"><tspan x="165.0" dy="0">Клиент</tspan></text>
+<text x="165.0" y="277" text-anchor="middle" font-size="17" font-weight="normal"><tspan x="165.0" dy="0">Приложение на телефоне</tspan><tspan x="165.0" dy="24">Сканирование QR</tspan><tspan x="165.0" dy="24">Выбор чаевых</tspan><tspan x="165.0" dy="24">Подтверждение / отмена</tspan></text>
+<rect x="550" y="200" width="360" height="200" rx="14" fill="#F0FDFA" stroke="#0F766E" stroke-width="2" />
+<text x="730.0" y="238" text-anchor="middle" font-size="23" font-weight="bold"><tspan x="730.0" dy="0">Платформа</tspan></text>
+<text x="730.0" y="277" text-anchor="middle" font-size="17" font-weight="normal"><tspan x="730.0" dy="0">Проверки QR и сумм</tspan><tspan x="730.0" dy="24">Расчёт чаевых и итога</tspan><tspan x="730.0" dy="24">Создание и статусы платежа</tspan><tspan x="730.0" dy="24">Идемпотентность / резерв QR</tspan></text>
+<rect x="1160" y="200" width="290" height="200" rx="14" fill="#FFF7ED" stroke="#C2410C" stroke-width="2" />
+<text x="1305.0" y="238" text-anchor="middle" font-size="23" font-weight="bold"><tspan x="1305.0" dy="0">Эмулятор шлюза</tspan></text>
+<text x="1305.0" y="277" text-anchor="middle" font-size="17" font-weight="normal"><tspan x="1305.0" dy="0">h = MD5(qr_id + nonce) mod 10</tspan><tspan x="1305.0" dy="24">0–7: успех; 8: отказ</tspan><tspan x="1305.0" dy="24">9: тайм-аут</tspan><tspan x="1305.0" dy="24">Без реального списания</tspan></text>
+<rect x="330" y="670" width="390" height="190" rx="14" fill="#F8FAFC" stroke="#475569" stroke-width="2" />
+<text x="525.0" y="708" text-anchor="middle" font-size="23" font-weight="bold"><tspan x="525.0" dy="0">Хранилище</tspan></text>
+<text x="525.0" y="747" text-anchor="middle" font-size="17" font-weight="normal"><tspan x="525.0" dy="0">merchants / employees / qr_links</tspan><tspan x="525.0" dy="24">payments.csv — история</tspan><tspan x="525.0" dy="24">payments_out.csv — результат</tspan><tspan x="525.0" dy="24">Ключи и резервы — проектные</tspan></text>
+<rect x="1010" y="670" width="400" height="190" rx="14" fill="#FAF5FF" stroke="#7E22CE" stroke-width="2" />
+<text x="1210.0" y="708" text-anchor="middle" font-size="23" font-weight="bold"><tspan x="1210.0" dy="0">Аудит</tspan></text>
+<text x="1210.0" y="747" text-anchor="middle" font-size="17" font-weight="normal"><tspan x="1210.0" dy="0">event_id, payment_id, qr_id</tspan><tspan x="1210.0" dy="24">action, from_status, to_status</tspan><tspan x="1210.0" dy="24">actor, at</tspan><tspan x="1210.0" dy="24">Без секретов и реквизитов</tspan></text>
+<rect x="331.4" y="201" width="187.2" height="48" rx="3" fill="white" />
+<text x="425" y="218" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="425" dy="0">1–3. QR, выбор чаевых,</tspan><tspan x="425" dy="24">подтверждение / отмена</tspan></text>
+<rect x="327.6" y="358" width="194.79999999999998" height="48" rx="3" fill="white" />
+<text x="425" y="375" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="425" dy="0">Чек, суммы, payment_id,</tspan><tspan x="425" dy="24">статус / код ошибки</tspan></text>
+<rect x="952.8" y="201" width="164.4" height="48" rx="3" fill="white" />
+<text x="1035" y="218" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="1035" dy="0">3. Запрос эмуляции:</tspan><tspan x="1035" dy="24">qr_id, nonce</tspan></text>
+<rect x="930.0" y="358" width="210.0" height="72" rx="3" fill="white" />
+<text x="1035" y="375" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="1035" dy="0">4. Успех / отказ / тайм-аут</tspan><tspan x="1035" dy="24">CARD_DECLINED /</tspan><tspan x="1035" dy="24">GATEWAY_TIMEOUT</tspan></text>
+<rect x="290.0" y="533" width="210.0" height="72" rx="3" fill="white" />
+<text x="395" y="550" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="395" dy="0">1, 2, 4. Чтение / запись:</tspan><tspan x="395" dy="24">QR, платёж, статус,</tspan><tspan x="395" dy="24">ключ, резерв</tspan></text>
+<rect x="714.0" y="593" width="172.0" height="72" rx="3" fill="white" />
+<text x="800" y="610" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="800" dy="0">Данные QR, мерчанта,</tspan><tspan x="800" dy="24">сотрудника; платёж</tspan><tspan x="800" dy="24">по прежнему ключу</tspan></text>
+<rect x="1105.0" y="533" width="210.0" height="72" rx="3" fill="white" />
+<text x="1210" y="550" text-anchor="middle" font-size="14" font-weight="normal"><tspan x="1210" dy="0">5. События создания,</tspan><tspan x="1210" dy="24">подтверждения, результата</tspan><tspan x="1210" dy="24">и отмены (8 полей)</tspan></text>
+<text x="740" y="905" text-anchor="middle" font-size="17" font-weight="normal"><tspan x="740" dy="0">Тайм-аут: проектный статус PENDING; CLI возвращает TIMEOUT. Исходные CSV не изменяются.</tspan></text>
+</g></svg>
