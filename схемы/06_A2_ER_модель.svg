@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1400" viewBox="0 0 1800 1400" role="img" aria-labelledby="title desc">
+<title id="title">A.2. ER-модель — онлайн-чаевые</title>
+<desc id="desc">Источник: 08_errors.md · PK — первичный ключ · FK — внешний ключ · 1:N — один ко многим</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#334155"/></marker></defs>
+<rect width="1800" height="1400" fill="white"/>
+<g font-family="Arial, sans-serif" fill="#0F172A">
+<text x="900.0" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#0F172A"><tspan x="900.0" dy="0">A.2. ER-модель — онлайн-чаевые</tspan></text>
+<text x="900.0" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="normal" fill="#0F172A"><tspan x="900.0" dy="0">Источник: 08_errors.md · PK — первичный ключ · FK — внешний ключ · 1:N — один ко многим</tspan></text>
+<polyline points="510,280 680,280" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="295,180 295,120 1500,120 1500,180" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="1110,350 1280,350" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="295,420 295,830" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="1500,540 1500,800" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<polyline points="1280,1030 1110,1030" fill="none" stroke="#334155" stroke-width="2.3" marker-end="url(#arrow)"/>
+<rect x="80" y="180" width="430" height="240" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<path d="M80 234 H510" stroke="#2563EB" stroke-opacity="0.4"/>
+<text x="295.0" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="295.0" dy="0">Merchant</tspan></text>
+<text x="98" y="264" text-anchor="start" font-family="Consolas, monospace" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="98" dy="0">PK merchant_id : string</tspan><tspan x="98" dy="27">name : string (1–100)</tspan><tspan x="98" dy="27">status : ACTIVE/BLOCKED/PENDING</tspan><tspan x="98" dy="27">description : string (0–200)</tspan></text>
+<rect x="680" y="180" width="430" height="240" rx="12" fill="#F0FDFA" stroke="#0F766E" stroke-width="2"/>
+<path d="M680 234 H1110" stroke="#0F766E" stroke-opacity="0.4"/>
+<text x="895.0" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="895.0" dy="0">Employee</tspan></text>
+<text x="698" y="264" text-anchor="start" font-family="Consolas, monospace" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="698" dy="0">PK employee_id : string</tspan><tspan x="698" dy="27">FK merchant_id → Merchant</tspan><tspan x="698" dy="27">name : string (1–100)</tspan><tspan x="698" dy="27">payment_details : ****NNNN</tspan></text>
+<rect x="1280" y="180" width="440" height="360" rx="12" fill="#FFF7ED" stroke="#C2410C" stroke-width="2"/>
+<path d="M1280 234 H1720" stroke="#C2410C" stroke-opacity="0.4"/>
+<text x="1500.0" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="1500.0" dy="0">QR</tspan></text>
+<text x="1298" y="264" text-anchor="start" font-family="Consolas, monospace" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1298" dy="0">PK qr_id : string</tspan><tspan x="1298" dy="27">FK merchant_id → Merchant</tspan><tspan x="1298" dy="27">FK employee_id → Employee</tspan><tspan x="1298" dy="27">receipt_id : string (r_NNNN)</tspan><tspan x="1298" dy="27">nonce : string (6 hex)</tspan><tspan x="1298" dy="27">exp : datetime UTC (+24 ч)</tspan><tspan x="1298" dy="27">signature : 16 hex HMAC-SHA256</tspan></text>
+<rect x="80" y="830" width="430" height="310" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2"/>
+<path d="M80 884 H510" stroke="#475569" stroke-opacity="0.4"/>
+<text x="295.0" y="865" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="295.0" dy="0">Report</tspan></text>
+<text x="98" y="914" text-anchor="start" font-family="Consolas, monospace" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="98" dy="0">PK report_id (при сохранении)</tspan><tspan x="98" dy="27">FK merchant_id → Merchant</tspan><tspan x="98" dy="27">period : string (YYYY-MM)</tspan><tspan x="98" dy="27">tips_total : decimal(12,2)</tspan><tspan x="98" dy="27">payments_count : integer</tspan><tspan x="98" dy="27">avg_tip_pct : number/null</tspan><tspan x="98" dy="27">success_rate : number/null</tspan></text>
+<rect x="1280" y="800" width="440" height="450" rx="12" fill="#FAF5FF" stroke="#7E22CE" stroke-width="2"/>
+<path d="M1280 854 H1720" stroke="#7E22CE" stroke-opacity="0.4"/>
+<text x="1500.0" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="1500.0" dy="0">Payment</tspan></text>
+<text x="1298" y="884" text-anchor="start" font-family="Consolas, monospace" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1298" dy="0">PK payment_id : string</tspan><tspan x="1298" dy="27">FK qr_id → QR (для новых)</tspan><tspan x="1298" dy="27">merchant_id, employee_id : string</tspan><tspan x="1298" dy="27">amount, tip : decimal(12,2)</tspan><tspan x="1298" dy="27">status : enum (5 состояний)</tspan><tspan x="1298" dy="27">timestamp : datetime UTC</tspan><tspan x="1298" dy="27">idempotency_key : string</tspan><tspan x="1298" dy="27">client_session_id : string</tspan></text>
+<rect x="680" y="830" width="430" height="420" rx="12" fill="#FDF2F8" stroke="#BE185D" stroke-width="2"/>
+<path d="M680 884 H1110" stroke="#BE185D" stroke-opacity="0.4"/>
+<text x="895.0" y="865" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="bold" fill="#0F172A"><tspan x="895.0" dy="0">AuditEvent</tspan></text>
+<text x="698" y="914" text-anchor="start" font-family="Consolas, monospace" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="698" dy="0">PK event_id : string</tspan><tspan x="698" dy="27">FK payment_id → Payment (null*)</tspan><tspan x="698" dy="27">qr_id : контекст QR</tspan><tspan x="698" dy="27">action : enum</tspan><tspan x="698" dy="27">from_status, to_status : enum/null</tspan><tspan x="698" dy="27">actor : string; at : datetime UTC</tspan><tspan x="698" dy="27">amount_total, error_code: контекст</tspan></text>
+<rect x="539.35" y="217" width="111.30000000000001" height="54" rx="4" fill="white"/>
+<text x="595" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="595" dy="0">1:N</tspan><tspan x="595" dy="27">merchant_id</tspan></text>
+<rect x="819.45" y="117" width="161.10000000000002" height="27" rx="4" fill="white"/>
+<text x="900" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="900" dy="0">1:N · merchant_id</tspan></text>
+<rect x="1139.35" y="287" width="111.30000000000001" height="54" rx="4" fill="white"/>
+<text x="1195" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1195" dy="0">1:N</tspan><tspan x="1195" dy="27">employee_id</tspan></text>
+<rect x="239.35" y="602" width="111.30000000000001" height="54" rx="4" fill="white"/>
+<text x="295" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="295" dy="0">1:N</tspan><tspan x="295" dy="27">merchant_id</tspan></text>
+<rect x="1394.55" y="627" width="210.9" height="54" rx="4" fill="white"/>
+<text x="1500" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1500" dy="0">1:N · qr_id</tspan><tspan x="1500" dy="27">не более одного SUCCESS</tspan></text>
+<rect x="1143.5" y="967" width="103.0" height="54" rx="4" fill="white"/>
+<text x="1195" y="985" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#0F172A"><tspan x="1195" dy="0">1:N</tspan><tspan x="1195" dy="27">payment_id</tspan></text>
+<text x="900" y="1310" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="normal" fill="#475569"><tspan x="900" dy="0">Связь QR → Payment обязательна для новых платежей; в историческом payments.csv поля qr_id нет.</tspan></text>
+<text x="900" y="1345" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="normal" fill="#475569"><tspan x="900" dy="0">* payment_id = null у события отказа до создания платежа. Схема описывает проектную модель.</tspan></text>
+</g></svg>
