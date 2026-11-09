@@ -42,7 +42,7 @@ def verify_signature(qr):
 
 
 def check_exp(qr, now="2025-11-01T18:00:00Z"):
-    return qr["exp"] >= now # на всякий случай
+    return qr["exp"] >= now
 
 
 def calc_amounts(base, pct):
